@@ -19,10 +19,14 @@ export default {
             }
     },
     methods : {
+
         addTodo : function(){
             if(this.newTodoItem !== ''){
-                this.$emit('addTodoItem',this.newTodoItem);
-                //addTodoItem; app.vue로 올라간다. 파라미터는 input 텍스트 값 
+                var obj = {completed:false, item : this.newTodoItem};
+
+                console.log(this.newTodoItem);
+                //저장하는 로직             
+                localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
                 this.clearInput();
             }
             

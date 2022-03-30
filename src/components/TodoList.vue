@@ -2,8 +2,8 @@
   <div>
 
       <ul>
-          <li v-for="(todoItem,index) in todoItems" v-bind:key="todoItem.item" class="shadow">
-<i class = "checkBtn fas fa-check" v-bind:class="{checkBtnCompoleted : todoItem.completed}" @click="toggleComplete(todoItem,index)"></i>
+          <li v-for="(todoItem,index) in propsdata" v-bind:key="todoItem.item" class="shadow">
+<i class = "checkBtn fas fa-check" v-bind:class="{checkBtnCompleted : todoItem.completed}" @click="toggleComplete(todoItem,index)"></i>
               <span v-bind:class="{textCompleted : todoItem.completed}">
               {{todoItem.item}}
               </span>
@@ -14,55 +14,44 @@
         
           </li>
 
-      </ul>
+      </ul> 
   </div>
 </template>
 
 <script>
 
 export default {
-data : function() {
-    return {
-        todoItems : [] //completed : , item : 
-    }
-},
-methods : {
-    removeTodo : function(todoItem, index){
-        console.log(todoItem,index);
-        localStorage.removeItem(todoItem);
-        this.todoItems.splice(index,1);
+    props: ['propsdata'],
+    methods: {
+        removeTodo : function(todoItem, index){            
+            //localStorage.removeItem(todoItem);
+            //this.todoItems.splice(index,1);
+            this.$emit("removeTodoItem",todoItem,index);
 
-    },
-    toggleComplete : function(todoItem,index){
-        console.log(todoItem,index);
-        todoItem.completed = !todoItem.completed;
-        
-        //로컬 스토리지 데이터 갱신 부분 
-        localStorage.removeItem(todoItem);
-        localStorage.setItem(todoItem.item,JSON.stringify(todoItem));
+        },
+        toggleComplete : function(todoItem,index){
+            
+            
+            
+            this.$emit("todoCompleteEmit",todoItem,index);
+            //로컬 스토리지 데이터 갱신 부분 
+            //todoItem.completed = !todoItem.completed;
+           // localStorage.removeItem(todoItem);
+           // localStorage.setItem(todoItem.item,JSON.stringify(todoItem));
 
-    }
-},
-created : function() {
-    if(localStorage.length > 0){
-        for(var i = 0; i < localStorage.length ; i++){
-            if(localStorage.key(i) != ""){                
-                //console.log( JSON.parse(localStorage.getItem(localStorage.key(i))));
-                this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-            }
         }
-    }
-}
+    },
+
 }
 </script>
 
-<style scopped>
+<style scoped>
 .textCompleted {
     color: blue;
     text-decoration: line-through;
 
 }
-.checkBtnCompoleted {
+.checkBtnCompleted {
     color : red;
 }
 .checkBtn {
