@@ -7,15 +7,34 @@
   <span class="addContainer">
      <i class="fas fa-plus addBtn" @click="addTodo"></i>
   </span>
+    <Modal v-if="showModal" @close="showModal = false">
+        <!--
+      you can use custom content here to overwrite
+      default content
+      <vslot="header">custom header</ㅅ>
+    -->
+        <div vslot = "header">
+        경고!    
+        </div>        
+        <div vslot = "body">
+        값 입력해주세요.
+        </div>
+        
+      </Modal>
+
   </div>
 </template>
 
 <script>
+
+import Modal from './common/AlertModal.vue';
+
 export default {
 
     data : function() {
             return {
-                newTodoItem : ""
+                newTodoItem : "",
+                showModal : false,
             }
     },
     methods : {
@@ -24,12 +43,21 @@ export default {
                 this.$emit('addTodoItem',this.newTodoItem);
                 //addTodoItem; app.vue로 올라간다. 파라미터는 input 텍스트 값 
                 this.clearInput();
+            }else{
+                //여기에 모달을 띄운다. 
+                this.showModal = !this.showModal;
+                
             }
             
         },
         clearInput : function(){
             this.newTodoItem = "";
-        }
+        },
+        
+    },
+    components : {
+        //인풋의 하위가 모달, 인풋의 상위가 앱.뷰 
+        Modal : Modal
     }
 
 }

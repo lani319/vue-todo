@@ -1,20 +1,20 @@
 <template>
   <div>
-
-      <ul>
-          <li v-for="(todoItem,index) in propsdata" v-bind:key="todoItem.item" class="shadow">
-<i class = "checkBtn fas fa-check" v-bind:class="{checkBtnCompleted : todoItem.completed}" @click="toggleComplete(todoItem,index)"></i>
-              <span v-bind:class="{textCompleted : todoItem.completed}">
-              {{todoItem.item}}
-              </span>
-
-              <span v-on:click="removeTodo(todoItem,index)">
-                 <i class="fas fa-trash-alt"></i>
-              </span>
+    <transition-group name="list" tag="ul"> <!-- css 클래스 연관 트랜지션 -->
         
-          </li>
+            <li v-for="(todoItem,index) in propsdata" :key="todoItem.item" class="shadow">
+                <i class = "checkBtn fas fa-check" 
+                :class="{checkBtnCompleted : todoItem.completed}" @click="toggleComplete(todoItem,index)"></i>
+                <span :class="{textCompleted : todoItem.completed}">
+                {{todoItem.item}}
+                </span>
 
-      </ul> 
+                <span v-on:click="removeTodo(todoItem,index)">
+                    <i class="fas fa-trash-alt"></i>
+                </span>
+            
+            </li>
+    </transition-group>
   </div>
 </template>
 
@@ -62,5 +62,17 @@ export default {
 .removeBtn {
     margin-left: auto;
     color: red;
+}
+
+/* 리스트 아이템 트랜지션 효과 */
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
