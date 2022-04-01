@@ -23,13 +23,13 @@
 export default {
     props: ['propsdata'],
     methods: {
-        removeTodo : function(todoItem, index){            
+        removeTodo (todoItem, index){            
             //localStorage.removeItem(todoItem);
             //this.todoItems.splice(index,1);
             this.$emit("removeTodoItem",todoItem,index);
 
         },
-        toggleComplete : function(todoItem,index){
+        toggleComplete (todoItem,index){
             
             
             

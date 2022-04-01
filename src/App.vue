@@ -64,10 +64,10 @@ methods : {
   }
 },
 components : {
-  "TodoHeader" : TodoHeader,
-  "TodoInput" : TodoInput,
-  "TodoList" : TodoList,
-  "TodoFooter" : TodoFooter
+  TodoHeader,
+  TodoInput,
+  TodoList,
+  TodoFooter
 }
 
 }

@@ -31,14 +31,14 @@ import Modal from './common/AlertModal.vue';
 
 export default {
 
-    data : function() {
+    data () {
             return {
                 newTodoItem : "",
                 showModal : false,
             }
     },
     methods : {
-        addTodo : function(){
+        addTodo (){
             if(this.newTodoItem !== ''){
                 this.$emit('addTodoItem',this.newTodoItem);
                 //addTodoItem; app.vue로 올라간다. 파라미터는 input 텍스트 값 
@@ -50,14 +50,14 @@ export default {
             }
             
         },
-        clearInput : function(){
+        clearInput (){
             this.newTodoItem = "";
         },
         
     },
     components : {
         //인풋의 하위가 모달, 인풋의 상위가 앱.뷰 
-        Modal : Modal
+        Modal
     }
 
 }
